@@ -60,5 +60,12 @@ select max(salary) from empsalary where salary < ( select max(salary) from empsa
 select * from clienttable;
 select clientname from clienttable where clientname  like "%g" ;
 
+select * from employee e join empdept d on e.department = d.deptid;
+select * from employee e join empsalary  s on e.empheadip = s.empid where ispermanent = "yes";
+select * from empsalary;
+select * from employee;
+select * from employee e join empsalary s on e.empheadip = s.empid ;
+select * from employee e join empdept d on e.department = d.deptid;
+select * from empdept;
 
   
