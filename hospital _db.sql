@@ -99,3 +99,65 @@ select * from docdept;
 
 select de.department_id , de.department_name from doctors join departments de on 
 d.department_id = de.department_id ;
+
+show tables;
+
+
+create database db_sql;
+use db_sql;
+create table  db_table (  id int primary key , name varchar(40), city varchar(40) );
+select * from db_table ;
+insert into   db_table (id, name , city ) values  (1, "shilpi", "bhopal"), (2,"rashi", "bhpal"), (3, "musakn", "satna") , ( 4 , "akriti", "satna");
+select * from db_table;
+
+# clause 
+# where 
+select * from db_table where city = "satna";
+select * from db_table where city = "bhopal";
+select * from db_table where id = 1;
+ select * from db_table where city in ("bhopal" and "satna");
+ 
+ #alter command 
+ alter table db_table add column  age int ;
+ alter table db_table add column state varchar (60);
+ alter table db_table  drop column state ;
+ alter table db_table rename  column city to new_city ;
+ rename table db_table to table_db;
+ alter table table_db modify age  int check (age >=18) ;
+ alter table table_db modify name varchar (50) not null;
+  
+ create table table_db1 as select * from table_db;
+ select * from table_db1;
+ alter table table_db1 rename column id to db_id ;
+ describe  table_db1;
+ alter table  table_db1 add primary key  (db_id);
+ alter table table_db add column db_id int;
+ alter table table_db add foreign key (db_id) references table_db1 (db_id);
+ select * from table_db ;
+ describe table_db;
+ alter table table_db drop foreign key table_db_ibfk_1 ;
+ alter table table_db drop key  db_id;
+ describe table_db;
+ alter table table_db add constraint u_name unique (id );
+ alter table table_db drop constraint u_name;
+ alter table table_db add column (country varchar(70), state varchar (80));
+ select * from table_db;
+ describe  table_db;
+ alter table table_db modify column country varchar(50) not null;
+ alter table table_db modify column country varchar(69) not null;
+ alter table table_db add column mo bigint after id;
+
+ 
+ 
+select * from products;
+
+use ecom;
+#List the Product Code and Product name of every product that has never been 
+--      in an order in which the customer asked for more than 48 of them.  
+--      Order by the Product Name.  (8)
+  select * from products;
+  select * from orderdetails;
+  select * from customers;
+  select productcode, productname from products where productcode  not in(select productcode from orderdetails where quantityordered >48);
+  select distinct p.productcode , productname from products p join  orderdetails od on p.productcode = od.productcode
+  where quantityordered >48 order by productname ; 
